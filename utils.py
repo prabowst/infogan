@@ -51,14 +51,14 @@ def plot_interval(epoch, gen_model):
 
 	row, col = 5, 5
 	fig, axes = plt.subplots(row, col)
-	for i in range(col):
+	for i in range(row):
 		label = tf.keras.utils.to_categorical(np.full(fill_value=i, 
 				shape=(row,1)), num_classes=10)
 		_, con_1, con_2, noise = sample_generator_input(col, 62, 10)
 		gen_input = np.concatenate((label, con_1, con_2, noise), axis=1)
 		gen_image = gen_model(gen_input, training=False)
 		gen_image = (gen_image / 2) + 0.5
-		for j in range(row):
+		for j in range(col):
 			axes[j,i].imshow(gen_image[j,:,:,0], cmap='gray')
 			axes[j,i].axis('off')
 	plt.suptitle('Sample Images Epoch ' + str(epoch))

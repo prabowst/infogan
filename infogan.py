@@ -41,7 +41,7 @@ def train():
 	batch = 128
 	con_size = 62
 	num_class = 10
-	epochs = 50
+	epochs = 100
 
 	disc_losses = []
 	gen_losses = []
@@ -135,7 +135,7 @@ def train():
 		gen_losses.append(np.mean(temp_gen))
 		aux_losses.append(np.mean(temp_aux))
 
-		print('Epoch [{:2d}/{:2d}] | disc_loss: {:6.4f} | gen_loss: {:6.4f} | aux_loss: {:6.4f} | runtime: {:.2f}s' \
+		print('Epoch [{:3d}/{:3d}] | disc_loss: {:6.4f} | gen_loss: {:6.4f} | aux_loss: {:6.4f} | runtime: {:.2f}s' \
 		.format(epoch+1, epochs, np.mean(temp_disc), np.mean(temp_gen), np.mean(temp_aux), time.time()-start))
 
 	epoch_axis = np.arange(1, (epochs)+1, dtype=np.int32)
@@ -151,7 +151,7 @@ def train():
 
 	sns.set_style('white')
 	plt.figure(figsize=(8,6))
-	ax = sns.lineplot(data=df, x='epoch', y='loss', hue='loss_type', marker='o')
+	ax = sns.lineplot(data=df, x='epoch', y='loss', hue='loss_type')
 	ax.set_title('Network Losses')
 	plt.savefig('figures/network_losses.png', dpi=300, bbox_inches='tight')
 	plt.close()
